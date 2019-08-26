@@ -37,5 +37,8 @@ script:
 - npm run build-dev
 - npm run build
 - npm test
+notifications:
+  email:
+  - sm4548@columbia.edu
 git:
   depth: 10

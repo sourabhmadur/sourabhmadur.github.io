@@ -1,4 +1,4 @@
-This is my personlan website built in javascript with Node.js, React, Express, React-Router, Hot Module Reloading, Webpack and many other technologies. It was built upon mldangelo's repo https://mldangelo.github.io/personal-site/.
+This is my personal website built in javascript with Node.js, React, Express, React-Router, Hot Module Reloading, Webpack and many other technologies. It was built upon mldangelo's repo https://mldangelo.github.io/personal-site/.
 
 
 <!-- ## [mldangelo.com](http://mldangelo.com) and simplified [mldangelo.github.io/personal-site](https://mldangelo.github.io/personal-site/)
