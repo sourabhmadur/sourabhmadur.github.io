@@ -1,7 +1,7 @@
 const degrees = [
   {
     school: 'Columbia University, New York',
-    degree: 'M.S. in Electrical Engineering (with a concentration in Machine Learning and Data Driven Analysis)',
+    degree: 'M.S. in Electrical and Computer Engineering (with a concentration in Machine Learning and Data Driven Analysis)',
     link: 'https://columbia.edu',
     year: 2019,
   }, {
