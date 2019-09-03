@@ -9,5 +9,5 @@ I've spent my time this summer interning at a Fintech startup in midtown called 
 <br />
 
 When I'm not building things, I spend my time playing basketball and dancing to Dembow and Salsa. Also, I like reading history and spend way too much time watching civil war and world war documentaries. 
-When I'm not building things, I spend my time playing basketball and dancing to Dembow and Salsa. Also, I like history and spend way too much time watching civil war and world war documentaries. 
+
 
