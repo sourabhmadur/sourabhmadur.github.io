@@ -7,4 +7,4 @@ I pursued my undergraduate degree at IIT Bombay in Mumbai, India. During my time
 I've spent my time this summer interning at a Fintech startup in midtown called Canoe Intelligence, where I developed algorithms for automatic data extraction from alternative investment documents. Specifically, I worked on implementing state of the art machine learning algorithms to extract data from Hedge Fund, Private Equity and Venture Capital documents. While here, I also got experience working as a full stack developer from Vue.js to PHP to MySql.
 <br />
 <br />
-When I'm not building things, I spend my time playing basketball and dancing to Dembow and Salsa. Also, I am a history nerd and spend way too much time watching civil war and world war documentaries. 
+When I'm not building things, I spend my time playing basketball and dancing to Dembow and Salsa. Also, I like history and spend way too much time watching civil war and world war documentaries. 
