@@ -19,7 +19,7 @@ const Index = () => (
         {/* view <Link to="/stats">site statistics</Link>, {' '} */}
         or <Link to="/contact">contact</Link> me.
       </p>
-      <p> Sourcecode available <a href="https://github.com/sourabhmadur/sourabhmadur.github.io">here</a>.</p>
+      {/* <p> Sourcecode available <a href="https://github.com/sourabhmadur/sourabhmadur.github.io">here</a>.</p> */}
     </article>
   </Main>
 );
