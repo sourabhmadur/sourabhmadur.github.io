@@ -1,13 +1,13 @@
-My name is Sourabh and I am graduate student at Columbia University in New York city. 
+Hi! I'm Sourabh and i'm a software engineer by profession..
 <br />
 <br />
-I pursued my undergraduate degree at IIT Bombay in Mumbai, India. During my time there, I worked on a number of interesting projects in academia, specifically in Theoretical and Computational Physics and also in Computational Neuroscience. I moved to US in 2018 for Grad school at Columbia where I've been learning different aspects of Software Engineering and Machine Learning. 
+My deep inquisitiveness with nature(and my undergrad degree in applied phyisics) led me to work on interesting projects in Theoretical Physics and Computational Neuroscience.  I moved to US in 2018 for Grad school at Columbia where I've worked on projects at the intersection of Software Engineering, Data Science and Machine Learning. Many skills were acquired here, both technical and life skills; the most important of them being thinking in terms of abstractions, which was in stark contrast to the first principles based thinking that I was used to during my undergrad education in physics.
 <br />
 <br />
-I've spent my time this summer interning at a Fintech startup in midtown called Canoe Intelligence, where I developed algorithms for automatic data extraction from alternative investment documents. Specifically, I worked on implementing state of the art machine learning algorithms to extract data from Hedge Fund, Private Equity and Venture Capital documents. While here, I also got experience working as a full stack developer from Vue.js to PHP to MySql.
+I spent the summer of 2019 interning at a Fintech startup in midtown, NY called Canoe Intelligence, where I developed algorithms for automatic data extraction from alternative investment documents. Specifically, I worked on implementing machine learning algorithms to extract data from Hedge Fund, Private Equity and Venture Capital documents. 
 <br />
 <br />
 
-When I'm not building things, I spend my time playing basketball and dancing to Dembow and Salsa. Also, I like reading history and spend way too much time watching civil war and world war documentaries. 
+After graduating from Columbia, I joined Oracle as a software engineer and am working as backend developer for OCI.
 
-
+With the little time that i have between work and projects, I spend my time playing basketball and reading books. 

@@ -82,7 +82,7 @@ export const skills = [
     category: ['Web Development', 'Frameworks', 'Javascript'],
   },
   {
-    title: 'Bash',
+    title: 'Shell',
     compentency: 4,
     category: ['Tools', 'Languages'],
   },
@@ -136,11 +136,11 @@ export const skills = [
   //   compentency: 3,
   //   category: ['Data Science', 'Machine Learning'],
   // },
-  {
-    title: 'Express.JS',
-    compentency: 2,
-    category: ['Web Development', 'Frameworks', 'Javascript'],
-  },
+  // {
+  //   title: 'Express.JS',
+  //   compentency: 2,
+  //   category: ['Web Development', 'Frameworks', 'Javascript'],
+  // },
   {
     title: 'Laravel(PHP)',
     compentency: 4,
@@ -158,7 +158,7 @@ export const skills = [
   // },
   {
     title: 'Flask',
-    compentency: 3,
+    compentency: 4,
     category: ['Web Development', 'Frameworks', 'Python'],
   },
   // {
@@ -191,11 +191,11 @@ export const skills = [
   //   compentency: 3,
   //   category: ['Tools'],
   // },
-  {
-    title: 'Google Cloud Compute',
-    compentency: 3,
-    category: ['Tools'],
-  },
+  // {
+  //   title: 'Google Cloud Compute',
+  //   compentency: 3,
+  //   category: ['Tools'],
+  // },
   {
     title: 'Numpy',
     compentency: 5,
@@ -213,7 +213,7 @@ export const skills = [
   },
   {
     title: 'pytorch',
-    compentency: 3,
+    compentency: 5,
     category: ['Data Science', 'Machine Learning', 'Python'],
   },
   {
@@ -254,7 +254,12 @@ export const skills = [
   },
   {
     title: 'C++',
-    compentency: 4,
+    compentency: 3,
+    category: ['Languages'],
+  },
+  {
+    title: 'Java',
+    compentency: 5,
     category: ['Languages'],
   },
   // {
@@ -279,14 +284,14 @@ export const skills = [
   // },
   {
     title: 'Keras',
-    compentency: 4,
+    compentency: 5,
     category: ['Machine Learning', 'Python'],
   },
-  {
-    title: 'Visualization',
-    compentency: 4,
-    category: ['Data Science', 'Javascript'],
-  },
+  // {
+  //   title: 'Visualization',
+  //   compentency: 4,
+  //   category: ['Data Science', 'Javascript'],
+  // },
   {
     title: 'GraphQL',
     compentency: 4,
