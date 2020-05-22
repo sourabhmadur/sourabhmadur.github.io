@@ -1,6 +1,16 @@
 
 const positions = [
   {
+    company: 'Oracle',
+    position: 'Member of Technical Staff',
+    link: 'https://www.oracle.com',
+    daterange: 'Feb 2020 - Present',
+    points: [
+      'OCI network monitoring team.',
+    ],
+    subpoints:[]
+  }, 
+  {
     company: 'Canoe Intelligence',
     position: 'Software Development/ Machine Learning Intern',
     link: 'https://www.canoesoftware.com/',
@@ -19,8 +29,8 @@ const positions = [
       'Software Engineering':[
         'Developed, implemented and integrated algorithms in PHP to improve the extraction and validation of data from PDF documents. ',
         'Worked with the Twilio API to improve the SMS notification system for clients.',
-        'Made changes to the front-end of various parts of the platform which was developed in Vue.js javascript library.',
-        'Wrote integration, unit tests and automated tests in Cypress to ensure expected behaviour of platform.'
+        'Made changes to the front-end of various parts of the platform which was developed in Vue.js',
+        'Wrote integration, unit tests and automated tests.'
       ]
       
       },
@@ -45,7 +55,7 @@ const positions = [
     daterange: 'July 2017 – May 2018',
     points: [
       'Simulated the dynamics of spiking neural networks in python.',
-      'Predicted the network behavior for networks with defective cells by analyzing the data produced from simulations.',
+      'Predicted the behavior for networks with defective cells by analyzing the data produced from simulations.',
     ],
     subpoints:[]
   },
@@ -55,7 +65,7 @@ const positions = [
     link: 'http://www.phy.iitb.ac.in/en/research/soft-matter-biophysics-and-nonlinear-dynamics',
     daterange: 'September 2016 – May 2017',
     points: [
-      'Mathematically modelled biological proteins and performed Monte-Carlo simulations in python to study their properties',
+      'Modelled biological proteins and performed Monte-Carlo simulations in python to study their properties',
       'Analyzed the data generated to study their non-linear properties.',
     ],
     subpoints:[]
@@ -67,7 +77,7 @@ const positions = [
     daterange: 'May 2016 – July 2016',
     points: [
       'Performed analytical calculations in Quantum mechanics(Condensed matter theory) to study the band structures of Optomechanical Graphene Lattice.',
-      'Computationally evaluated and visualized the band structure in MATLAB and python..',
+      'Computational calculations of  band structure',
     ],
     subpoints:[]
   },
