@@ -1,6 +1,30 @@
 This is my personal website built in javascript with Node.js, React, Express, React-Router, Hot Module Reloading, Webpack and many other technologies. It was built upon mldangelo's repo https://mldangelo.github.io/personal-site/.
 
 
+Instructions for updating the page:
+
+git clone https://github.com/sourabhmadur/sourabhmadur.github.io.git
+
+sudo npm run install
+
+cp sample.env .env
+
+In .env, change NODE_ENV to development 
+
+Make the required changes
+
+test by npm run dev
+
+Push the changes
+
+In .env, change NODE_ENV to production
+
+Run sudo npm run deploy
+
+
+
+
+
 <!-- ## [mldangelo.com](http://mldangelo.com) and simplified [mldangelo.github.io/personal-site](https://mldangelo.github.io/personal-site/)
 
 My personal website. Easily modifiable, and built using modern javascript with Node.js, React, Express, React-Router, Hot Module Reloading, Webpack and many other technologies.
