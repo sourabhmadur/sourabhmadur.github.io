@@ -2,24 +2,26 @@ This is my personal website built in javascript with Node.js, React, Express, Re
 
 
 Instructions for updating the page:
-
+```
 git clone https://github.com/sourabhmadur/sourabhmadur.github.io.git
 
 sudo npm run install
 
 cp sample.env .env
 
+```
+
 In .env, change NODE_ENV to development 
 
 Make the required changes
 
-test by npm run dev
+test by ```npm run dev```
 
 Push the changes
 
 In .env, change NODE_ENV to production
 
-Run sudo npm run deploy
+Run ```sudo npm run deploy```
 
 
 
