@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What is Lorem Ipsum?"
+title: "Why is it important to Write?"
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
 comments: true
 keywords: "dummy content, lorem ipsum"
