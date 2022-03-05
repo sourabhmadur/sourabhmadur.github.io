@@ -22,7 +22,7 @@ Writing, among all other modes of communication, has the best decoupling between
 
 Writing helps cement understanding on any topic. Often, when writing something technical, I find myself revisitng what i wrote and doing fact checks for things that i previously assumed to be true. This continual process of meta cognition forces you to think hard of about what you are writing and in the process helps identify cognitive biases and knowledge gaps. 
 
-One of my favorite physicists and original thinkers is Richarch Feynman, who developed the Feynman technique (https://www.colorado.edu/artssciences-advising/resource-library/life-skills/the-feynman-technique-in-academic-coaching). Writing can not only be a form of sharing knowledge but can be a great tool to learn something new when it is incorporated into the Feynman Technique. The process of learning something through writing could look something like this:
+One of my favorite physicists and original thinkers is Richarch Feynman, who developed the [Feynman Technique](https://www.colorado.edu/artssciences-advising/resource-library/life-skills/the-feynman-technique-in-academic-coaching). Writing can not only be a form of sharing knowledge but can be a great tool to learn something new when it is incorporated into the Feynman Technique. The process of learning something through writing could look something like this:
 	- Decide on a topic to write about
 	- Learn about the topic
 	- Write about it.
