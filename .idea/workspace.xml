@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2863b705-4196-4c73-90ff-1670e8b1b5ea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2022-03-06-productivity-system.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2022-03-06-productivity-system.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +22,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/posts_archive" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_posts" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts" />
       <recent name="$PROJECT_DIR$/posts_archive" />
     </key>
   </component>
