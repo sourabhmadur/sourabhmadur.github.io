@@ -46,3 +46,5 @@ Human memory, especially short-term memory is limited. Thanks to the [monetizati
 It is very easy to be constantly context switch between social media apps and tasks that you need to accomplish. This ultimately results in zero progress on any of the tasks. Without progress, it is hard to find any sense of completion or happiness in life.
 
 For me, one of the joys in life is being in a flow state. This involves intensely focusing on something for an extended period. I often find myself in a flow state when playing a game of basketball, reading something interesting, playing a game of chess, or hacking on a project. Writing gives me another avenue to be in the flow state as it involves being in a different headspace than doing something which involves less creativity.
+
+> If you’ve got any comments or suggestions, feel free to hmu at sm4548@columbia.edu
