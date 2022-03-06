@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2863b705-4196-4c73-90ff-1670e8b1b5ea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2022-03-04-why-is-it-important-to-write.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2022-03-04-why-is-it-important-to-write.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,5 +49,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
