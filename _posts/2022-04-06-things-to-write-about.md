@@ -8,4 +8,6 @@ keywords: "blogging, writing"
 
 # usecases if perfect AI existed
 # covid vaccine prediction
+# case study for a viral technology adoption : social media
+# maslovs pyramid investment framework
 #  
