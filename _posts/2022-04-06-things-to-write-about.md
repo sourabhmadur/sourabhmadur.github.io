@@ -10,4 +10,10 @@ keywords: "blogging, writing"
 # covid vaccine prediction
 # case study for a viral technology adoption : social media
 # maslovs pyramid investment framework
-#  
+#  Experiences in the US
+# How git works
+# BGP perfix hijacks
+# Meta oracle differences
+# How to decide what to write about
+# decision making frameworks
+# 
