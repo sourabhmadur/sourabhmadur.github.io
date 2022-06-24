@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to compete with big tech?"
-description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+description: "some thoughts on how big tech gained their moat"
 comments: true
 keywords: "blogging, writing"
 ---
