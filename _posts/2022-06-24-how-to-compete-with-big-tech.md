@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to compete with big tech?"
+title: "Big Tech Big Moat"
 description: "some thoughts on how big tech gained their moat"
 comments: true
 keywords: "blogging, writing"
