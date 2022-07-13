@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Big Tech Big Moat"
+title: "Big Tech - Big Moat"
 description: "some thoughts on how big tech gained their moat"
 comments: true
 keywords: "blogging, writing"
