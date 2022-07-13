@@ -6,7 +6,7 @@ comments: true
 keywords: "blogging, writing"
 ---
 
-Recommendation systems(RS) have become ubiquitous in the past few years. All 10 of the most visited websites on the internet use recommendation systems of some form (https://www.semrush.com/blog/most-visited-websites/) on their landing page. Given this prevalence, what are the most common types of use cases?
+Recommendation systems(RS) have become ubiquitous in the past few years. All 10 of the most visited websites on the internet use recommendation systems of [some form](https://www.semrush.com/blog/most-visited-websites/) on their landing page. Given this prevalence, what are the most common types of use cases?
 
 
 At their core Recommendation systems(RS) are matching algorithms that pick items from a large set and recommend them to an item from a second set. For instance, recommend the most appropriate videos among a massive set of videos to a user from the user's set.  Depending on the type of items in the first set, there are 4 main types of RS:
