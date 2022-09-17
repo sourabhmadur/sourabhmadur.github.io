@@ -34,6 +34,11 @@ By varying the confidence threshold, we obtain a PR curve and the area under thi
 Taking the mean for all the labels gives up MAP, which is the mean average precision at some IOU threshold. 
 
 
+### Current SOTA for CV models 
+
+https://medium.com/@pedroazevedo6/object-detection-state-of-the-art-2022-ad750e0f6003
+
+
 
 References:
 
