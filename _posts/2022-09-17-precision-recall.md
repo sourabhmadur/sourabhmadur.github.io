@@ -6,12 +6,13 @@ comments: true
 keywords: "blogging, writing"
 ---
 
-recision and recall are one of the most fundamental metrics in machine learning and having a good intuition for these metrics is really important for evaluating any of the fancy models.
+Precision and recall are one of the most fundamental metrics in machine learning and having a good intuition for these metrics is really important for evaluating any of the fancy models.
 
 
 ### Confusion Matrix
 
 The results of a classification models can be visualzed nealty by [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix).
+
 
 
 ### Precision
@@ -28,6 +29,11 @@ $Recall = tp/(tp+fn)$
 - Out of all the positively labeled samples, how many did our model capture as true positives and how many did it miss out on(and classify as false negatives)?
 
 - If recall is one, our model was able to classify all positively labelled samples correctly.
+
+
+Here is a diagram summarizing precision and recall:
+
+![diagram](https://en.wikipedia.org/wiki/Precision_and_recall#/media/File:Precisionrecall.svg)
 
 
 ### Real life applications and case studies
