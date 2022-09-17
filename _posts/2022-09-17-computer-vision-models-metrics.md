@@ -14,11 +14,6 @@ IOU for a predicted bounding box and ground truth box is the area of intersectio
 
 ### Average precision(AP)@IOU_threshold for a label in an eval dataset
 
-
-MAP@IOU_threshold : Mean average precision
-
-
-
 Lets say the eval dataset has 10 images. Each image has an apple and we are trying to detect apples in images. Our model takes in an image and ouputs a bounding box for the apple with a confidence score. 
 
 For every confidence threshold, we can filter out these predictions and get a filtered list of predictions. 
