@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Why Write?"
+title: "Some observations about US""
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
 comments: true
 keywords: "blogging, writing"
 ---
 
-Its been 4 years since i came to the US back in 2018. Before landing in NYC, i was in Mumbai for my undergrad education. 
+Its been 4 years since i came to the US back in 2018. Before landing in NYC.
 
 _ Large houses and vast empty spaces for a middle class family.  
 
@@ -18,7 +18,7 @@ _ Large houses and vast empty spaces for a middle class family.
 
 - Its Land of immigrants, yet some percent of population hates immigrants. 
 
-- Immigrants(fist and second gen) building many valuable companies. Can't imagine an immigrant.suceeding in India. 
+- Immigrants(fist and second gen) building many valuable companies. Can't imagine an immigrant suceeding in India. 
 
 - Work life balance way better than in India(from what i've been told). Easy to work for 8 hrs a day.
 
