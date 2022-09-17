@@ -8,7 +8,7 @@ keywords: "blogging, writing"
 
 Its been 4 years since i came to the US back in 2018. Before landing in NYC.
 
-_ Large houses and vast empty spaces for a middle class family.  
+- Large houses and vast empty spaces for a middle class family.  
 
 - Ludicrous public transport(except for NYC). 
 
