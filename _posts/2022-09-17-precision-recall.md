@@ -33,7 +33,7 @@ $Recall = tp/(tp+fn)$
 
 Here is a diagram summarizing precision and recall:
 
-![diagram](https://en.wikipedia.org/wiki/Precision_and_recall#/media/File:Precisionrecall.svg)
+[PR visualization](https://en.wikipedia.org/wiki/Precision_and_recall#/media/File:Precisionrecall.svg)
 
 
 ### Real life applications and case studies
