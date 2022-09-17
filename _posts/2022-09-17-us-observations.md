@@ -14,7 +14,7 @@ _ Large houses and vast empty spaces for a middle class family.
 
 - Generally clean neighbourhoods (except for some downtowns). Really clean and well maintained roads.
 
-- Implementation of the idea of meritocracy(at least in large tech corporate companies) is probably better than any country in the world. Strong anti-discrimination laws. Caste, gender or race based discrimination  absent(almost). 
+- Implementation of the idea of meritocracy(at least in large tech corporate companies) is probably better than any country in the world. Strong anti-discrimination laws. Caste, gender or race based discrimination  absent(almost)[https://www.reuters.com/article/us-cisco-lawsuit/california-accuses-cisco-of-job-discrimination-based-on-indian-employees-caste-idUSKBN2423YE]
 
 - Its Land of immigrants, yet some percent of population hates immigrants. 
 
