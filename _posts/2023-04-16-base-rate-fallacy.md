@@ -12,11 +12,11 @@ Now, let's say you take the test and it shows you have cancer. You panic, then c
 
 Let's use Bayes' rule to calculate your actual probability of having cancer.
 
-$$P(Cancer | positive_test) = P(positive_test | Cancer) * P(cancer) / [P(positive_test | Cancer) * P(cancer) + P(positive_test | no_cancer) * P(no_cancer)]$$
+$$ P(Cancer | positive\_test) = P(positive\_test | Cancer) * P(cancer) / [P(positive\_test | Cancer) * P(cancer) + P(positive\_test | no\_cancer) * P(no\_cancer)]$$
 
 Assuming a 1% cancer prevalence in the population,
 
-$$P(Cancer | positive_test) = 1*0.01/(1*0.01+0.05*0.99) = 0.168$$
+$$P(Cancer | positive\_test) = (1)(0.01)/(1\*0.01+0.05\*0.99) = 0.168$$
 
 So, you actually have a 16% chance of having cancer. Not bad odds, huh? It's like playing Russian roulette with four bullets in the gun instead of one.
 
