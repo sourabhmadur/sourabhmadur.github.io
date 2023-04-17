@@ -34,4 +34,4 @@ E-commerce platforms like Amazon, and virtual stores like the apple store or the
 
 In contrast to using recommendation systems to market products in an in-house marketplace like Amazon, most companies market their products on a third-party platform like Facebook or Google as they can leverage the data they collected on users to show better ads. These companies, as a result, build RS that recommend ads to their users.
 
-test
+
