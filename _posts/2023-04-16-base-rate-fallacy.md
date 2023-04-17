@@ -18,5 +18,5 @@ Assuming a 1% cancer prevalence in the population,
 
 $$P(Cancer | positive\_test) = (1)(0.01)/(1\*0.01+0.05\*0.99) = 0.168$$
 
-So, you actually have a 16% chance of having cancer. Not bad odds, huh? It's like playing Russian roulette with four bullets in the gun instead of one.
+So, you actually have a 16% chance of having cancer. Not bad odds, huh? 
 
