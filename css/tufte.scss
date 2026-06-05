@@ -482,6 +482,33 @@ header > nav a{
 h1.content-listing-header{
   margin-top: 1rem;
 }
+// "Cite this post" section at the bottom of each article
+.cite-block{
+  width: 72%;
+  margin-top: 4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid #e0e0e0;
+}
+.cite-block h2{
+  font-style: normal;
+  font-family: $sans-font;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 1.4rem;
+  margin-top: 0;
+}
+.cite-block p.cite-plain{
+  width: 100%;
+  font-size: 1.3rem;
+}
+.cite-block pre.cite-bibtex{
+  width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 1.1rem;
+  background: #f7f7f7;
+  padding: 1rem 1.2rem;
+}
 .full-width article > h1:first-child,
 article.group > h1:first-child{
   margin-top: 1rem;

@@ -6,6 +6,20 @@
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
+  <!-- Google Scholar / Highwire Press citation metadata (posts only) -->
+  {% if page.layout == "post" %}
+  {% assign cite_author = page.author | default: site.author %}
+  <meta name="citation_title" content="{{ page.title | strip_html | xml_escape }}">
+  <meta name="citation_author" content="{{ cite_author | xml_escape }}">
+  <meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
+  <meta name="citation_online_date" content="{{ page.date | date: '%Y/%m/%d' }}">
+  <meta name="citation_journal_title" content="sourabhmadur.github.io">
+  <meta name="citation_publisher" content="sourabhmadur.github.io">
+  <meta name="citation_abstract_html_url" content="{{ page.url | absolute_url }}">
+  <meta name="citation_fulltext_html_url" content="{{ page.url | absolute_url }}">
+  <meta name="citation_language" content="en">
+  {% endif %}
+
   <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
   {% if site.data.options.lato_font_load %}
     <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
