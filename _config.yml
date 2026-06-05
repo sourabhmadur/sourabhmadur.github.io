@@ -1,63 +1,26 @@
-# Site settings
-title_left    : "Sai Sourabh"
-title_right   : " Madur" # default: ""
-description   : "Minimalist Jekyll theme for technical writing blog."
-keywords      : "Jekyll, theme, free, download, SEO, blog, web, minimalist, thinkspace"
-url           : https://sourabhmadur.github.io # site url
-baseurl       : "" # apply repo name like "/myproject" if used under gh-pages branch, else (under master branch) just leave empty/blank
-cover         : "" # image uri like logo/cover image for site seo
+title: Sai Sourabh Madur
+subtitle: writing & notes
+author: Sai Sourabh Madur
+email: ""
+simple_search: https://www.google.com/search
+description: >-
+  Essays and notes on software, machine learning, distributed systems,
+  and whatever else I'm thinking about.
 
-#google_analytics  : UA-XXXXX-XX
-#twitter_username  : ""
-#comments_enabled  : false # if enabled (set to true), please provide your disqus_username
-disqus_shortname  : ""
-postshare_enabled : false
+url: https://sourabhmadur.github.io
+baseurl: ""
 
-# Build settings
-permalink   : /:year/:title/
-markdown    : kramdown
-highlighter : rouge
-
-source      : ./
-destination : ./_site
-
-# Sass configuration
-sass:
-  sass_dir  : assets/scss
-  style     : compressed # expanded
-
-# Author settings
-author:
-  name     : "John Doe"
-
-plugins:
-  - jekyll-sitemap
-  - bourbon
-  - jekyll-paginate
-
-# navbar pages
-navbar:
-  - slug : about
-    title: About
-  - slug : blog
-    title: Blog
+markdown: kramdown
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+highlighter: rouge
+permalink: /:year/:title/
+timezone: America/Los_Angeles
+excerpt_separator: <!--more-->
 
 exclude:
-  - "gulp"
-  - "node_modules"
-  - "bower"
-  - "bower_components"
-  - "config.rb"
-  - "src"
-  - "Gemfile"
-  - "Gemfile.lock"
-  - ".rvmrc"
-  - ".rbenv-version"
-  - "package.json"
-  - "gulpfile.js"
-  - "README.md"
-  - "Rakefile"
-  - "changelog.md"
-  - "script"
-  - "vendor"
-  - "thinkspace.gemspec"
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - UploadToGithub.Rakefile
+  - README.md
+  - vendor
