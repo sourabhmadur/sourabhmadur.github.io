@@ -467,10 +467,24 @@ li.listing:last-of-type{
   margin-bottom: 1.4rem;
 }
 
-// --- Custom: text masthead + clean article listing ---
-header > nav a.site-title{
-  font-weight: 600;
-  letter-spacing: 0.12em;
+// --- Custom: menu spacing + clean article listing ---
+header > nav.group{
+  padding-bottom: 1.6rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+header > nav a{
+  padding-top: 0;
+  padding-right: 2.6rem;
+  font-size: 1.15rem;
+}
+// give the page heading room below the menu
+h1.content-listing-header{
+  margin-top: 1rem;
+}
+.full-width article > h1:first-child,
+article.group > h1:first-child{
+  margin-top: 1rem;
 }
 li.listing{
   display: block;
