@@ -10,7 +10,7 @@ When ChatGPT arrived in 2022, I gave up writing. Not dramatically. I just quietl
 
 But I was wrong about what writing is *for*.
 
-### The Mistake I Made
+## The Mistake I Made
 
 I had confused the product with the process. I thought writing was about producing something: a good sentence, a well-structured argument, an entertaining paragraph. If a machine can do that better, then yes, the game is over. But that framing misses the point entirely.
 
@@ -18,7 +18,7 @@ Writing isn't primarily an output. It's a *thinking tool*.
 
 When you write, you hold a conversation with yourself. Ideas that seem clear in your head reveal themselves as murky the moment you try to put them into words. Writing forces decomposition. You can't lazily keep things vague once they have to live on a page. You pull a thread, and suddenly you're three paragraphs deep into a question you didn't even know you had. That process of untangling, connecting, and surprising yourself is not something AI does *for* you. It's something you have to do *through* writing.
 
-### What Writing Actually Does
+## What Writing Actually Does
 
 **It forms your opinions.** The human mind can hold only so many ideas in working memory at once. Writing externalizes your thoughts, giving you a larger canvas to work with. You can lay your beliefs out in front of you, examine them, find the contradictions, and revise. Without this, your opinions remain a gumbo: half-formed, inconsistent, unreliable under pressure. Over time, keeping a writing practice lets you track how your thinking evolves. You build a record of what you actually believe about the world and why.
 
@@ -28,7 +28,7 @@ When you write, you hold a conversation with yourself. Ideas that seem clear in 
 
 **It's a form of joy.** There is genuine pleasure in weaving words together to communicate something true or beautiful or funny. It is, at its best, a kind of art: throwing colors around and painting pictures that exist nowhere else. That process is worth pursuing entirely on its own terms, separate from any audience or output.
 
-### What AI Changes
+## What AI Changes
 
 Here's the interesting inversion: AI doesn't make writing less valuable. It makes the *thinking* part of writing more accessible.
 
@@ -38,7 +38,7 @@ The catch is that AI has no particular *taste*. It has no lived experience. No 1
 
 Ironically, if you use AI well, you end up thinking *more*, not less. You produce more work, engage more deeply with your own ideas, and stay more connected to your inner life. AI doesn't replace your humanity. Used correctly, it gives you more time to practice it.
 
-### So Go Write
+## So Go Write
 
 It's never been easier to start. Dictate your thoughts on a walk. Let AI clean up the rough edges. Then sit with what you actually said and push it further.
 

@@ -466,6 +466,40 @@ li.listing:last-of-type{
   border-bottom: none;
   margin-bottom: 1.4rem;
 }
+
+// --- Custom: text masthead + clean article listing ---
+header > nav a.site-title{
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+li.listing{
+  display: block;
+  margin-bottom: 2.8rem;
+}
+li.listing a h3{
+  display: block;
+  margin: 0.2rem 0 0.2rem 0;
+}
+li.listing .smaller{
+  display: block;
+  font-family: $sans-font;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.6rem;
+}
+li.listing p.listing-excerpt{
+  width: 72%;
+  margin: 0.4rem 0 0.6rem 0;
+}
+a.read-more{
+  font-family: $sans-font;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $contrast-color;
+}
 li.listing h3.new {
   text-transform: uppercase;
   font-style: normal;
