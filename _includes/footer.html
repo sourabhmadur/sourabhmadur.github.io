@@ -1,14 +1,25 @@
 <footer>
-  <hr class="slender">
-  <ul class="footer-links">
-    {% for entry in site.data.social %}
-      <li>
-        <a href="{{ entry.link }}"><span class="{{ entry.icon }}"></span></a>
-      </li>
-    {% endfor %}  
-  </ul>
-<div class="credits">
-<span>&copy; {{ site.time | date: '%Y' }} &nbsp;&nbsp;{{site.author | upcase }}</span></br> <br>
-<span>Built with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme</a> for <a href="//jekyllrb.com">Jekyll</a>.</span>
-</div>  
+  <div class="site-container footer-inner">
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
+  </div>
 </footer>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', function () {
+      var isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(function (el) { observer.observe(el); });
+  })();
+</script>

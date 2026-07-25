@@ -1,6 +1,9 @@
 - link: //github.com/sourabhmadur
   icon: icon-github
+  label: GitHub
 - link: //www.linkedin.com/in/sourabhmadur/
   icon: icon-linkedin
+  label: LinkedIn
 - link: /feed.xml
   icon: icon-rss2
+  label: RSS

@@ -24,3 +24,8 @@ exclude:
   - UploadToGithub.Rakefile
   - README.md
   - vendor
+  - node_modules
+  - dist
+  - package.json
+  - package-lock.json
+  - .env
