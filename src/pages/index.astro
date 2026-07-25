@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { homePageContent, identity } from "../config";
+import SocialLink from "../components/SocialLink.astro";
+import Link from "../components/Link.astro";
+import { getCollection } from "astro:content";
+
+let posts = await getCollection("posts");
+posts = posts.filter((p) => !p.data?.draft);
+posts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime();
+  const dateB = new Date(b.data.pubDate).getTime();
+  return dateB - dateA;
+});
+posts.splice(3);
+---
+
+<Layout seo={homePageContent.seo}>
+  <section class="mt-10 max-w-2xl mx-auto px-6 scroll-reveal">
+    <h1 class="font-bold text-3xl mb-8">{identity.name}</h1>
+    <div class="flex items-center gap-6 mb-8">
+      <div
+        class="rounded-full shrink-0 w-[110px] h-[110px] bg-gray-bg-light dark:bg-gray-bg flex items-center justify-center text-2xl font-semibold opacity-60"
+        aria-hidden="true"
+      >
+        SM
+      </div>
+      <div class="group flex flex-col gap-2">
+        {
+          homePageContent.socialLinks.map((link) => (
+            <SocialLink
+              title={link.title}
+              url={link.url}
+              icon={link.icon}
+              external={link.external}
+            />
+          ))
+        }
+      </div>
+    </div>
+    <div class="text-base leading-relaxed mb-8 space-y-4">
+      {homePageContent.bio.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+    <div class="flex items-center gap-4 group w-fit mb-8">
+      {
+        homePageContent.links.map((link) => (
+          <Link text={link.title} href={link.url} />
+        ))
+      }
+    </div>
+  </section>
+  <section class="mt-20 max-w-2xl mx-auto px-6 scroll-reveal">
+    <h2 class="mb-8">Latest Posts</h2>
+    <div class="grid grid-cols-1 gap-8 mb-10">
+      {
+        posts.map((post) => (
+          <a
+            href={`/blog/${post.id.replace(/\.md$/, '')}`}
+            class="post"
+          >
+            <p class="opacity-60 mb-2">
+              {post.data.pubDate.toLocaleDateString()}
+            </p>
+            <h3 class="font-medium hover-underline">{post.data.title}</h3>
+            <p class="text-sm opacity-60 mt-2 mb-3">{post.data.description}</p>
+          </a>
+        ))
+      }
+    </div>
+    <div class="text-center">
+      <a
+        href="/blog"
+        class="underline underline-offset-4 opacity-60 hover:opacity-100 transition-opacity"
+        >View all</a
+      >
+    </div>
+  </section>
+  {homePageContent.currentlyReading && homePageContent.currentlyReading.length > 0 && (
+    <section class="mt-20 max-w-2xl mx-auto px-6 mb-20 scroll-reveal">
+      <h2 class="mb-8">Recent Reads</h2>
+      <ul class="space-y-3">
+        {homePageContent.currentlyReading.map((book) => (
+          <li class="flex items-baseline gap-2">
+            <span class="font-medium">{book.title}</span>
+            <span class="opacity-60">by {book.author}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Layout>

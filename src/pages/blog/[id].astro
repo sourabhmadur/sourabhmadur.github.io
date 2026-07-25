@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { identity } from "../../config";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts
+    .filter((p) => !p.data?.draft)
+    .map((post) => ({
+      params: { id: post.id.replace(/\.md$/, "") },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<Layout
+  seo={{
+    title: post.data.title,
+    description: post.data.description,
+  }}
+>
+  <section class="mt-10 max-w-2xl mx-auto px-6">
+    <h1 class="font-bold text-3xl mb-4">{post.data.title}</h1>
+    <p class="opacity-60 mb-6">
+      {post.data.description}
+    </p>
+    <div class="flex gap-4 mb-10">
+      <div
+        class="w-[40px] aspect-square rounded-full bg-gray-bg-light dark:bg-gray-bg flex items-center justify-center text-xs font-semibold opacity-60"
+        aria-hidden="true"
+      >
+        SM
+      </div>
+      <div>
+        <p class="font-medium">{identity.name}</p>
+        <p class="opacity-60">
+          {post.data.pubDate.toLocaleDateString()} · {remarkPluginFrontmatter.minutesRead}
+        </p>
+      </div>
+    </div>
+
+    <article
+      class="prose dark:prose-invert prose-a:text-blue-600 dark:prose-a:text-blue-300 prose-a:underline-offset-4 prose-headings:mb-2 prose-p:text-gray-600 dark:prose-p:text-[#b3b3b3]"
+    >
+      <Content />
+    </article>
+
+    <section class="mt-16 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <h2 class="text-lg font-medium mb-4">Cite this post</h2>
+      <p class="text-sm mb-4">
+        {identity.name} ({post.data.pubDate.getFullYear()}). <em>{post.data.title}</em>. sourabhmadur.github.io. https://sourabhmadur.github.io/blog/{post.id.replace(/\.md$/, "")}/
+      </p>
+      <pre class="text-xs bg-gray-bg-light dark:bg-gray-bg rounded-lg p-4 overflow-x-auto whitespace-pre-wrap break-words"><code>{`@misc{madur${post.data.pubDate.getFullYear()}_${post.id.replace(/\.md$/, "").replace(/-/g, "_")},
+  author       = {${identity.name}},
+  title        = {${post.data.title}},
+  year         = {${post.data.pubDate.getFullYear()}},
+  howpublished = {\\url{https://sourabhmadur.github.io/blog/${post.id.replace(/\.md$/, "")}/}},
+  publisher    = {sourabhmadur.github.io}
+}`}</code></pre>
+    </section>
+  </section>
+</Layout>
