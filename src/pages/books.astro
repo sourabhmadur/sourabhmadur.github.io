@@ -1,15 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { identity } from "../config";
+import { getBooks } from "../lib/supabase";
 
-const BOOKS = [
-  { country: "Russia", title: "Notes from Underground", author: "Fyodor Dostoevsky" },
-  { country: "Lebanon", title: "Antifragile", author: "Nassim Nicholas Taleb" },
-  { country: "USA", title: "Fahrenheit 451", author: "Ray Bradbury" },
-  { country: "Japan", title: "Norwegian Wood", author: "Haruki Murakami" },
-  { country: "Germany", title: "Siddhartha", author: "Hermann Hesse" },
-  { country: "England", title: "The Razor's Edge", author: "W. Somerset Maugham" },
-];
+const allBooks = await getBooks();
+const mappedBooks = allBooks.filter((b) => b.country);
 ---
 
 <Layout
@@ -24,10 +19,10 @@ const BOOKS = [
   </section>
   <section id="map-container" class="books-map"></section>
   <div id="tooltip" class="books-tooltip"></div>
-  <script id="books-data" type="application/json" set:html={JSON.stringify(BOOKS)} />
+  <script id="books-data" type="application/json" set:html={JSON.stringify(mappedBooks)} />
   <section class="mt-16 max-w-2xl mx-auto px-6 mb-20 scroll-reveal">
     <ul class="space-y-3">
-      {BOOKS.map((book) => (
+      {mappedBooks.map((book) => (
         <li class="flex items-baseline gap-2 text-sm">
           <span class="opacity-60 shrink-0">{book.country}</span>
           <span class="opacity-30">&ndash;</span>

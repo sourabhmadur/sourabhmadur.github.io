@@ -1,18 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
+import { getPosts } from "../../lib/supabase";
 import { blogPageContent } from "../../config";
 
-let posts = await getCollection("posts");
-posts = posts.filter((p) => !p.data?.draft);
-posts.sort((a, b) => {
-  const dateA = new Date(a.data.pubDate).getTime();
-  const dateB = new Date(b.data.pubDate).getTime();
-  return dateB - dateA;
-});
-for (const post of posts) {
-  const { remarkPluginFrontmatter } = await render(post);
-  post.data.readingTime = remarkPluginFrontmatter.minutesRead;
+const posts = await getPosts();
+
+function readingTime(text: string) {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min read`;
 }
 ---
 
@@ -23,16 +19,12 @@ for (const post of posts) {
     <div class="grid grid-cols-1 gap-8 mb-10">
       {
         posts.map((post) => (
-          <a
-            href={`/blog/${post.id.replace(/\.md$/, '')}`}
-            class="post"
-          >
+          <a href={`/blog/${post.slug}`} class="post">
             <p class="opacity-60 mb-2">
-              {post.data.pubDate.toLocaleDateString()} ·{" "}
-              {post.data.readingTime}
+              {new Date(post.pub_date).toLocaleDateString()} &middot; {readingTime(post.content)}
             </p>
-            <h3 class="font-medium hover-underline">{post.data.title}</h3>
-            <p class="text-sm opacity-60 mt-2 mb-3">{post.data.description}</p>
+            <h3 class="font-medium hover-underline">{post.title}</h3>
+            <p class="text-sm opacity-60 mt-2 mb-3">{post.description}</p>
           </a>
         ))
       }

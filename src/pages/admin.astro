@@ -1,0 +1,247 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout seo={{ title: "Admin", description: "Content admin." }}>
+  <section class="mt-10 max-w-2xl mx-auto px-6 mb-20">
+    <h1 class="font-bold text-3xl mb-8">Admin</h1>
+
+    <div id="signed-out" class="hidden">
+      <button id="sign-in-btn" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
+        Sign in with Google
+      </button>
+    </div>
+
+    <div id="unauthorized" class="hidden">
+      <p class="mb-4">Signed in, but this account isn't authorized to manage this site.</p>
+      <button id="sign-out-btn-unauth" class="underline opacity-60 hover:opacity-100">Sign out</button>
+    </div>
+
+    <div id="admin-panel" class="hidden">
+      <div class="flex items-center justify-between mb-10">
+        <p id="whoami" class="opacity-60 text-sm"></p>
+        <button id="sign-out-btn" class="underline opacity-60 hover:opacity-100 text-sm">Sign out</button>
+      </div>
+
+      <div id="status-banner" class="hidden mb-6 p-3 rounded-lg text-sm"></div>
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold mb-4">New Post</h2>
+        <form id="post-form" class="space-y-3">
+          <input name="slug" placeholder="slug (e.g. my-new-post)" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <input name="title" placeholder="Title" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <input name="description" placeholder="Short description" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <input name="pub_date" type="date" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <textarea name="content" placeholder="Content (Markdown)" required rows="12" class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent font-mono text-sm"></textarea>
+          <label class="flex items-center gap-2 text-sm opacity-80">
+            <input type="checkbox" name="draft" /> Save as draft
+          </label>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
+            Publish Post
+          </button>
+        </form>
+      </section>
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold mb-4">Existing Posts</h2>
+        <ul id="posts-list" class="space-y-2 text-sm"></ul>
+      </section>
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold mb-4">Add Book</h2>
+        <form id="book-form" class="space-y-3">
+          <input name="title" placeholder="Book title" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <input name="author" placeholder="Author" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <input name="country" placeholder="Country (optional, for Bookshelf map)" class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
+            Add Book
+          </button>
+        </form>
+      </section>
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold mb-4">Existing Books</h2>
+        <ul id="books-list" class="space-y-2 text-sm"></ul>
+      </section>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { createClient } from "@supabase/supabase-js";
+
+  const OWNER_EMAIL = "sourabhmadur@gmail.com";
+  const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL as string;
+  const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string;
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const signedOutEl = document.getElementById("signed-out")!;
+  const unauthorizedEl = document.getElementById("unauthorized")!;
+  const adminPanelEl = document.getElementById("admin-panel")!;
+  const whoamiEl = document.getElementById("whoami")!;
+  const statusBanner = document.getElementById("status-banner") as HTMLDivElement;
+
+  function showBanner(message: string, isError = false) {
+    statusBanner.textContent = message;
+    statusBanner.className = `mb-6 p-3 rounded-lg text-sm ${isError ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"}`;
+    statusBanner.classList.remove("hidden");
+    setTimeout(() => statusBanner.classList.add("hidden"), 5000);
+  }
+
+  async function triggerRebuild() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+    try {
+      await fetch(`${SUPABASE_URL}/functions/v1/trigger-site-rebuild`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+    } catch (e) {
+      console.error("Failed to trigger rebuild", e);
+    }
+  }
+
+  async function loadPosts() {
+    const { data: posts } = await supabase
+      .from("site_posts")
+      .select("*")
+      .order("pub_date", { ascending: false });
+    const list = document.getElementById("posts-list")!;
+    list.innerHTML = "";
+    (posts ?? []).forEach((post: any) => {
+      const li = document.createElement("li");
+      li.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-200 dark:border-gray-800";
+      li.innerHTML = `<span>${post.title} <span class="opacity-60">${post.draft ? "(draft)" : ""}</span></span>`;
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.className = "opacity-60 hover:opacity-100 underline shrink-0";
+      del.onclick = async () => {
+        if (!confirm(`Delete "${post.title}"?`)) return;
+        await supabase.from("site_posts").delete().eq("id", post.id);
+        await loadPosts();
+        await triggerRebuild();
+        showBanner("Post deleted, rebuild triggered.");
+      };
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+  }
+
+  async function loadBooks() {
+    const { data: books } = await supabase
+      .from("site_books")
+      .select("*")
+      .order("sort", { ascending: false });
+    const list = document.getElementById("books-list")!;
+    list.innerHTML = "";
+    (books ?? []).forEach((book: any) => {
+      const li = document.createElement("li");
+      li.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-200 dark:border-gray-800";
+      li.innerHTML = `<span>${book.title} <span class="opacity-60">by ${book.author}${book.country ? ` &middot; ${book.country}` : ""}</span></span>`;
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.className = "opacity-60 hover:opacity-100 underline shrink-0";
+      del.onclick = async () => {
+        if (!confirm(`Delete "${book.title}"?`)) return;
+        await supabase.from("site_books").delete().eq("id", book.id);
+        await loadBooks();
+        await triggerRebuild();
+        showBanner("Book deleted, rebuild triggered.");
+      };
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+  }
+
+  document.getElementById("post-form")!.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+    const { error } = await supabase.from("site_posts").insert({
+      slug: fd.get("slug"),
+      title: fd.get("title"),
+      description: fd.get("description"),
+      content: fd.get("content"),
+      pub_date: fd.get("pub_date"),
+      draft: fd.get("draft") === "on",
+      author: "Sourabh Madur",
+    });
+    if (error) {
+      showBanner(`Error: ${error.message}`, true);
+      return;
+    }
+    form.reset();
+    await loadPosts();
+    await triggerRebuild();
+    showBanner("Post published! Site is rebuilding (~30s).");
+  });
+
+  document.getElementById("book-form")!.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+    const { data: maxSortRow } = await supabase
+      .from("site_books")
+      .select("sort")
+      .order("sort", { ascending: false })
+      .limit(1)
+      .single();
+    const nextSort = (maxSortRow?.sort ?? 0) + 1;
+    const { error } = await supabase.from("site_books").insert({
+      title: fd.get("title"),
+      author: fd.get("author"),
+      country: fd.get("country") || null,
+      sort: nextSort,
+    });
+    if (error) {
+      showBanner(`Error: ${error.message}`, true);
+      return;
+    }
+    form.reset();
+    await loadBooks();
+    await triggerRebuild();
+    showBanner("Book added! Site is rebuilding (~30s).");
+  });
+
+  document.getElementById("sign-in-btn")!.addEventListener("click", async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.href },
+    });
+  });
+
+  document.getElementById("sign-out-btn")!.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.reload();
+  });
+  document.getElementById("sign-out-btn-unauth")!.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.reload();
+  });
+
+  async function init() {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    signedOutEl.classList.add("hidden");
+    unauthorizedEl.classList.add("hidden");
+    adminPanelEl.classList.add("hidden");
+
+    if (!session) {
+      signedOutEl.classList.remove("hidden");
+      return;
+    }
+
+    if (session.user.email !== OWNER_EMAIL) {
+      unauthorizedEl.classList.remove("hidden");
+      return;
+    }
+
+    whoamiEl.textContent = `Signed in as ${session.user.email}`;
+    adminPanelEl.classList.remove("hidden");
+    await loadPosts();
+    await loadBooks();
+  }
+
+  init();
+</script>

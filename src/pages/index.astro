@@ -3,16 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import { homePageContent, identity } from "../config";
 import SocialLink from "../components/SocialLink.astro";
 import Link from "../components/Link.astro";
-import { getCollection } from "astro:content";
+import { getPosts, getBooks } from "../lib/supabase";
 
-let posts = await getCollection("posts");
-posts = posts.filter((p) => !p.data?.draft);
-posts.sort((a, b) => {
-  const dateA = new Date(a.data.pubDate).getTime();
-  const dateB = new Date(b.data.pubDate).getTime();
-  return dateB - dateA;
-});
-posts.splice(3);
+const posts = (await getPosts()).slice(0, 3);
+const books = (await getBooks()).slice(0, 7);
 ---
 
 <Layout seo={homePageContent.seo}>
@@ -54,15 +48,12 @@ posts.splice(3);
     <div class="grid grid-cols-1 gap-8 mb-10">
       {
         posts.map((post) => (
-          <a
-            href={`/blog/${post.id.replace(/\.md$/, '')}`}
-            class="post"
-          >
+          <a href={`/blog/${post.slug}`} class="post">
             <p class="opacity-60 mb-2">
-              {post.data.pubDate.toLocaleDateString()}
+              {new Date(post.pub_date).toLocaleDateString()}
             </p>
-            <h3 class="font-medium hover-underline">{post.data.title}</h3>
-            <p class="text-sm opacity-60 mt-2 mb-3">{post.data.description}</p>
+            <h3 class="font-medium hover-underline">{post.title}</h3>
+            <p class="text-sm opacity-60 mt-2 mb-3">{post.description}</p>
           </a>
         ))
       }
@@ -75,11 +66,11 @@ posts.splice(3);
       >
     </div>
   </section>
-  {homePageContent.currentlyReading && homePageContent.currentlyReading.length > 0 && (
+  {books.length > 0 && (
     <section class="mt-20 max-w-2xl mx-auto px-6 mb-20 scroll-reveal">
       <h2 class="mb-8">Recent Reads</h2>
       <ul class="space-y-3">
-        {homePageContent.currentlyReading.map((book) => (
+        {books.map((book) => (
           <li class="flex items-baseline gap-2">
             <span class="font-medium">{book.title}</span>
             <span class="opacity-60">by {book.author}</span>

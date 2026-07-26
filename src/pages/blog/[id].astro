@@ -1,32 +1,38 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
+import { getPosts } from "../../lib/supabase";
 import { identity } from "../../config";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts
-    .filter((p) => !p.data?.draft)
-    .map((post) => ({
-      params: { id: post.id.replace(/\.md$/, "") },
-      props: { post },
-    }));
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { id: post.slug },
+    props: { post },
+  }));
 }
 
 const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(post);
+
+function readingTime(text: string) {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min read`;
+}
+
+const { marked } = await import("marked");
+const contentHtml = marked.parse(post.content);
 ---
 
 <Layout
   seo={{
-    title: post.data.title,
-    description: post.data.description,
+    title: post.title,
+    description: post.description,
   }}
 >
   <section class="mt-10 max-w-2xl mx-auto px-6">
-    <h1 class="font-bold text-3xl mb-4">{post.data.title}</h1>
+    <h1 class="font-bold text-3xl mb-4">{post.title}</h1>
     <p class="opacity-60 mb-6">
-      {post.data.description}
+      {post.description}
     </p>
     <div class="flex gap-4 mb-10">
       <div
@@ -38,27 +44,26 @@ const { Content, remarkPluginFrontmatter } = await render(post);
       <div>
         <p class="font-medium">{identity.name}</p>
         <p class="opacity-60">
-          {post.data.pubDate.toLocaleDateString()} · {remarkPluginFrontmatter.minutesRead}
+          {new Date(post.pub_date).toLocaleDateString()} &middot; {readingTime(post.content)}
         </p>
       </div>
     </div>
 
     <article
       class="prose dark:prose-invert prose-a:text-blue-600 dark:prose-a:text-blue-300 prose-a:underline-offset-4 prose-headings:mb-2 prose-p:text-gray-600 dark:prose-p:text-[#b3b3b3]"
-    >
-      <Content />
-    </article>
+      set:html={contentHtml}
+    />
 
     <section class="mt-16 pt-6 border-t border-gray-200 dark:border-gray-800">
       <h2 class="text-lg font-medium mb-4">Cite this post</h2>
       <p class="text-sm mb-4">
-        {identity.name} ({post.data.pubDate.getFullYear()}). <em>{post.data.title}</em>. sourabhmadur.github.io. https://sourabhmadur.github.io/blog/{post.id.replace(/\.md$/, "")}/
+        {identity.name} ({new Date(post.pub_date).getFullYear()}). <em>{post.title}</em>. sourabhmadur.github.io. https://sourabhmadur.github.io/blog/{post.slug}/
       </p>
-      <pre class="text-xs bg-gray-bg-light dark:bg-gray-bg rounded-lg p-4 overflow-x-auto whitespace-pre-wrap break-words"><code>{`@misc{madur${post.data.pubDate.getFullYear()}_${post.id.replace(/\.md$/, "").replace(/-/g, "_")},
+      <pre class="text-xs bg-gray-bg-light dark:bg-gray-bg rounded-lg p-4 overflow-x-auto whitespace-pre-wrap break-words"><code>{`@misc{madur${new Date(post.pub_date).getFullYear()}_${post.slug.replace(/-/g, "_")},
   author       = {${identity.name}},
-  title        = {${post.data.title}},
-  year         = {${post.data.pubDate.getFullYear()}},
-  howpublished = {\\url{https://sourabhmadur.github.io/blog/${post.id.replace(/\.md$/, "")}/}},
+  title        = {${post.title}},
+  year         = {${new Date(post.pub_date).getFullYear()}},
+  howpublished = {\\url{https://sourabhmadur.github.io/blog/${post.slug}/}},
   publisher    = {sourabhmadur.github.io}
 }`}</code></pre>
     </section>
