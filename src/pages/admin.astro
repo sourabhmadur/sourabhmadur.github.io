@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+// Must match the "name" property values in public/world.geojson exactly,
+// or the Bookshelf map won't be able to color the country in.
+const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bangladesh", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "England", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Fiji", "Finland", "France", "French Southern and Antarctic Lands", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Guatemala", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Mali", "Mauritania", "Mexico", "Moldova", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Northern Cyprus", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of Serbia", "Republic of the Congo", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Sierra Leone", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Thailand", "The Bahamas", "Togo", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "USA", "Uganda", "Ukraine", "United Arab Emirates", "United Republic of Tanzania", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "West Bank", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"];
 ---
 
 <Layout seo={{ title: "Admin", description: "Content admin." }}>
@@ -52,7 +56,10 @@ import Layout from "../layouts/Layout.astro";
         <form id="book-form" class="space-y-3">
           <input name="title" placeholder="Book title" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
           <input name="author" placeholder="Author" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
-          <input name="country" placeholder="Country (optional, for Bookshelf map)" class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
+          <select name="country" class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent">
+            <option value="">No country (not part of Bookshelf map)</option>
+            {COUNTRIES.map((c) => <option value={c}>{c}</option>)}
+          </select>
           <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
             Add Book
           </button>
