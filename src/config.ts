@@ -56,10 +56,10 @@ export const homePageContent: HomePageContent = {
       "Essays and notes on software, machine learning, distributed systems, and whatever else I'm thinking about.",
   },
   bio: [
-    "I'm a Software Engineer at Meta in the San Francisco Bay Area.",
-    "I have interests in programming languages, distributed systems, machine learning, and tech history, to name a few.",
-    "Previously I was at Oracle working on distributed systems, and before that at Columbia University in New York, gaining academic exposure to machine learning.",
-    "I write here when I'm bored.",
+    "I'm an AI Engineer at Supio, an early-stage legal AI startup.",
+    "Previously at Meta, I worked on Instagram's recommendation systems and product growth, and later on the AI team behind Ray-Ban Meta Smart Glasses. Before that, I built distributed systems at Oracle.",
+    "I hold a degree in Computer Science with a concentration in AI from Columbia University.",
+    "I read and write for fun, which is most of what ends up on this site.",
   ],
   socialLinks: socialLinks,
   links: [
@@ -87,13 +87,13 @@ export const homePageContent: HomePageContent = {
 export const aboutPageContent: AboutPageContent = {
   seo: {
     title: "About | " + identity.name,
-    description: "Software Engineer at Meta in the San Francisco Bay Area.",
+    description: "AI Engineer at Supio, previously Meta and Oracle.",
   },
   description: [
-    "Hi, I'm Sourabh. I'm a Software Engineer at Meta in the San Francisco Bay Area.",
-    "I have interests in programming languages, distributed systems, machine learning, and tech history, to name a few.",
-    "Previously I was at Oracle working on distributed systems, and before that at Columbia University in New York, gaining academic exposure to machine learning.",
-    "I write here when I'm bored. You can find me on <a href=\"https://github.com/sourabhmadur\">GitHub</a> and <a href=\"https://www.linkedin.com/in/sourabhmadur/\">LinkedIn</a>.",
+    "Hi, I'm Sourabh. I'm an AI Engineer at Supio, an early-stage legal AI startup.",
+    "Previously at Meta, I worked on Instagram's recommendation systems and product growth, and later on the AI team behind Ray-Ban Meta Smart Glasses. Before that, I built distributed systems at Oracle.",
+    "I hold a degree in Computer Science with a concentration in AI from Columbia University.",
+    "I read and write for fun. You can find me on <a href=\"https://github.com/sourabhmadur\">GitHub</a> and <a href=\"https://www.linkedin.com/in/sourabhmadur/\">LinkedIn</a>.",
   ],
 };
 
