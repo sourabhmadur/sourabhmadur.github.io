@@ -2,7 +2,7 @@
 title: "Things to write about"
 pubDate: 2022-04-06
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 draft: true
 ---
 # usecases if perfect AI existed

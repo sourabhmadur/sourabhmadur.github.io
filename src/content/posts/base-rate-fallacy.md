@@ -2,7 +2,7 @@
 title: "Base rate fallacy"
 pubDate: 2023-04-16
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Picture yourself in the year 2040. Cancer detection technology has become so inexpensive that there are drive-through stores where you can test for cancer and get immediate results. The test engineers designed it to have a recall of one to avoid false negatives, as they could be deadly to the person being tested. However, the high recall came at a cost of low precision, resulting in a 95 percent false positive rate. In other words, if you tested everyone without cancer, 5% of them would be labeled as having cancer.
 

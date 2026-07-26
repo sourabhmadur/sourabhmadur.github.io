@@ -2,7 +2,7 @@
 title: "The Door I Didn't Notice Opening: A Quick Exploration into Magical Realism"
 pubDate: 2026-06-10
 description: "A journal entry from a writers' block session in San Francisco: what magical realism is, how it differs from fantasy, why it felt familiar to someone who grew up in India, and a reading list for the road ahead."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Today I stumbled, entirely by accident, upon a writers' guild in San Francisco, the kind of door you don't remember choosing to walk through, and joined their Writers' Block sessions.
 

@@ -2,7 +2,7 @@
 title: "Precision and Recall"
 pubDate: 2022-09-17
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Precision and recall are one of the most fundamental metrics in machine learning and having a good intuition for these metrics is really important for evaluating any of the fancy models.
 

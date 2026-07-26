@@ -2,7 +2,7 @@
 title: "Back to Office"
 pubDate: 2022-03-07
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Today, after two years of working from home, i  returned to office. It feels like time froze here since March 2020.
 

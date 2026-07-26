@@ -2,7 +2,7 @@
 title: "Some observations about US"
 pubDate: 2022-09-17
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Its been 4 years since i came to the US back in 2018. Before landing in NYC.
 

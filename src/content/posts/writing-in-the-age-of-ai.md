@@ -2,7 +2,7 @@
 title: "Writing in the Age of AI"
 pubDate: 2026-06-05
 description: "When ChatGPT arrived, I gave up writing. I was wrong about what writing is for..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 When ChatGPT arrived in 2022, I gave up writing. Not dramatically. I just quietly stopped. What was the point? Here was a machine that could produce essays that were more coherent, more entertaining, and more polished than anything I could put together. It could write about anything, instantly. My sentences felt clumsy by comparison. Why bother?
 

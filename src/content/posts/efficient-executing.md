@@ -2,7 +2,7 @@
 title: "Effecient Execution"
 pubDate: 2022-04-27
 description: "Tips on fast execution and getting thigs done"
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Executives at corporate organizations have the most reponsibility among all the employees. If the company misses an earnings estimate,
 if the revenue growth is not as expected, if the hiring is not as fast as it should be, executives are under attack from investors. 

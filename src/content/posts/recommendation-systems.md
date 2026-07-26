@@ -2,7 +2,7 @@
 title: "Thoughts on Recommendation systems"
 pubDate: 2022-07-12
 description: "some thoughts on recommendation systems"
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 Recommendation systems(RS) have become ubiquitous in the past few years. All 10 of the most visited websites on the internet use recommendation systems of [some form](https://www.semrush.com/blog/most-visited-websites/) on their landing page. Given this prevalence, what are the most common types of use cases?
 

@@ -8,7 +8,7 @@ import type {
 } from "./types/config";
 
 export const identity: Identity = {
-  name: "Sai Sourabh Madur",
+  name: "Sourabh Madur",
   email: "",
 };
 

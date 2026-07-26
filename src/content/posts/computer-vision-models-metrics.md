@@ -2,7 +2,7 @@
 title: "Metrics for computer vision models"
 pubDate: 2022-09-17
 description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 ### IOU
 

@@ -2,7 +2,7 @@
 title: "Caprice as Exploration: The Underground Man as a Reinforcement Learning Agent"
 pubDate: 2026-06-06
 description: "Dostoevsky's Underground Man insisted that acting against our own advantage is the highest advantage of all. Read through reinforcement learning, his caprice looks a lot like exploration."
-author: "Sai Sourabh Madur"
+author: "Sourabh Madur"
 ---
 In *Notes from the Underground*, Dostoevsky's narrator makes a claim that has irritated rationalists ever since: people do not reliably act in their own best interest. He builds his argument around the idea of "advantage" — the bundle of goods that supposedly governs human behavior. Advantage, on this account, means wealth, prosperity, honor, peace, and reason itself: the things every sensible person is assumed to want and to pursue. The Underground Man's complaint is that if human beings really did organize their lives around these advantages, then we would be entirely predictable. Behavior would reduce to a kind of arithmetic. Give a person the optimal path to wealth or peace, and they would take it every time.
 
