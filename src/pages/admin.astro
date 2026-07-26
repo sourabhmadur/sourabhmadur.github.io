@@ -106,16 +106,23 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     setTimeout(() => statusBanner.classList.add("hidden"), 5000);
   }
 
-  async function triggerRebuild() {
+  async function triggerRebuild(): Promise<{ ok: boolean; detail?: string }> {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return;
+    if (!session) return { ok: false, detail: "Not signed in" };
     try {
-      await fetch(`${SUPABASE_URL}/functions/v1/trigger-site-rebuild`, {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/trigger-site-rebuild`, {
         method: "POST",
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
+      if (!res.ok) {
+        const body = await res.text();
+        console.error("Rebuild trigger failed", res.status, body);
+        return { ok: false, detail: `${res.status}: ${body}` };
+      }
+      return { ok: true };
     } catch (e) {
       console.error("Failed to trigger rebuild", e);
+      return { ok: false, detail: String(e) };
     }
   }
 
@@ -137,8 +144,11 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
         if (!confirm(`Delete "${post.title}"?`)) return;
         await supabase.from("site_posts").delete().eq("id", post.id);
         await loadPosts();
-        await triggerRebuild();
-        showBanner("Post deleted, rebuild triggered.");
+        const rebuild = await triggerRebuild();
+        showBanner(
+          rebuild.ok ? "Post deleted, rebuild triggered." : `Post deleted, but rebuild failed: ${rebuild.detail}`,
+          !rebuild.ok
+        );
       };
       li.appendChild(del);
       list.appendChild(li);
@@ -163,8 +173,11 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
         if (!confirm(`Delete "${book.title}"?`)) return;
         await supabase.from("site_books").delete().eq("id", book.id);
         await loadBooks();
-        await triggerRebuild();
-        showBanner("Book deleted, rebuild triggered.");
+        const rebuild = await triggerRebuild();
+        showBanner(
+          rebuild.ok ? "Book deleted, rebuild triggered." : `Book deleted, but rebuild failed: ${rebuild.detail}`,
+          !rebuild.ok
+        );
       };
       li.appendChild(del);
       list.appendChild(li);
@@ -190,8 +203,11 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     }
     form.reset();
     await loadPosts();
-    await triggerRebuild();
-    showBanner("Post published! Site is rebuilding (~30s).");
+    const rebuild = await triggerRebuild();
+    showBanner(
+      rebuild.ok ? "Post published! Site is rebuilding (~30s)." : `Post saved, but rebuild failed: ${rebuild.detail}`,
+      !rebuild.ok
+    );
   });
 
   document.getElementById("book-form")!.addEventListener("submit", async (e) => {
@@ -217,8 +233,11 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     }
     form.reset();
     await loadBooks();
-    await triggerRebuild();
-    showBanner("Book added! Site is rebuilding (~30s).");
+    const rebuild = await triggerRebuild();
+    showBanner(
+      rebuild.ok ? "Book added! Site is rebuilding (~30s)." : `Book saved, but rebuild failed: ${rebuild.detail}`,
+      !rebuild.ok
+    );
   });
 
   document.getElementById("sign-in-btn")!.addEventListener("click", async () => {
