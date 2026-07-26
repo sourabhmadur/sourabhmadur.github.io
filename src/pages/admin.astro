@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 
 // Must match the "name" property values in public/world.geojson exactly,
 // or the Bookshelf map won't be able to color the country in.
@@ -56,10 +57,19 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
         <form id="book-form" class="space-y-3">
           <input name="title" placeholder="Book title" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
           <input name="author" placeholder="Author" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
-          <select name="country" class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent">
-            <option value="">No country (not part of Bookshelf map)</option>
-            {COUNTRIES.map((c) => <option value={c}>{c}</option>)}
-          </select>
+          <div class="relative">
+            <select
+              name="country"
+              class="w-full appearance-none px-3 py-2 pr-9 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-black text-black dark:text-white hover:bg-gray-bg-light dark:hover:bg-gray-bg transition-colors cursor-pointer focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+            >
+              <option value="">No country (not part of Bookshelf map)</option>
+              {COUNTRIES.map((c) => <option value={c}>{c}</option>)}
+            </select>
+            <Icon
+              name="mdi:chevron-down"
+              class="w-5 h-5 absolute right-2.5 top-1/2 -translate-y-1/2 opacity-60 pointer-events-none"
+            />
+          </div>
           <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
             Add Book
           </button>
