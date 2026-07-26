@@ -38,11 +38,6 @@ export type HomePageContent = {
   currentlyReading?: ReadingItem[];
 };
 
-export type AboutPageContent = {
-  seo: SEOInfo;
-  description: string[];
-};
-
 export type BlogPageContent = {
   seo: SEOInfo;
   subtitle: string;
