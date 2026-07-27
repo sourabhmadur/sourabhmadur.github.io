@@ -1,9 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+// Build-time reads only. Deliberately avoids @supabase/supabase-js here:
+// its client initializes a Realtime/WebSocket connection on construction,
+// which hangs the Node build process indefinitely since nothing ever
+// closes it. Plain REST calls avoid pulling that in. The admin page
+// creates its own full client separately for interactive auth/writes.
 
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL as string;
 const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string;
-
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export type SitePost = {
   id: string;
@@ -24,21 +26,23 @@ export type SiteBook = {
   sort: number;
 };
 
+async function restQuery<T>(query: string): Promise<T> {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${query}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`Supabase REST error (${res.status}): ${await res.text()}`);
+  }
+  return res.json();
+}
+
 export async function getPosts(): Promise<SitePost[]> {
-  const { data, error } = await supabase
-    .from("site_posts")
-    .select("*")
-    .eq("draft", false)
-    .order("pub_date", { ascending: false });
-  if (error) throw error;
-  return data ?? [];
+  return restQuery<SitePost[]>("site_posts?select=*&draft=eq.false&order=pub_date.desc");
 }
 
 export async function getBooks(): Promise<SiteBook[]> {
-  const { data, error } = await supabase
-    .from("site_books")
-    .select("*")
-    .order("sort", { ascending: false });
-  if (error) throw error;
-  return data ?? [];
+  return restQuery<SiteBook[]>("site_books?select=*&order=sort.desc");
 }

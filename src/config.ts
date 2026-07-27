@@ -57,7 +57,7 @@ export const homePageContent: HomePageContent = {
   bio: [
     "I'm an AI Engineer at Supio, an early-stage legal AI startup.",
     "Previously at Meta, I worked on Instagram's recommendation systems and product growth, and later on the AI team behind Ray-Ban Meta Smart Glasses. Before that, I built distributed systems at Oracle.",
-    "I studied at IIT Bombay before earning a degree in Electrical Engineering from Columbia University, where I focused my coursework on AI and computer science.",
+    "I studied at IIT Bombay before studying Computer Science at Columbia University, specifically diving into AI.",
     "I read and write for fun, which is most of what ends up on this site.",
   ],
   socialLinks: socialLinks,
