@@ -31,7 +31,7 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
       <div id="status-banner" class="hidden mb-6 p-3 rounded-lg text-sm"></div>
 
       <section class="mb-16">
-        <h2 class="text-xl font-bold mb-4">New Post</h2>
+        <h2 id="post-form-heading" class="text-xl font-bold mb-4">New Post</h2>
         <form id="post-form" class="space-y-3">
           <input name="slug" placeholder="slug (e.g. my-new-post)" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
           <input name="title" placeholder="Title" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
@@ -41,9 +41,14 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
           <label class="flex items-center gap-2 text-sm opacity-80">
             <input type="checkbox" name="draft" /> Save as draft
           </label>
-          <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
-            Publish Post
-          </button>
+          <div class="flex items-center gap-3">
+            <button id="post-submit-btn" type="submit" class="px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium">
+              Publish Post
+            </button>
+            <button id="post-cancel-edit-btn" type="button" class="hidden px-4 py-2 rounded-lg underline opacity-60 hover:opacity-100">
+              Cancel edit
+            </button>
+          </div>
         </form>
       </section>
 
@@ -126,6 +131,34 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     }
   }
 
+  let editingPostId: string | null = null;
+
+  function startEditingPost(post: any) {
+    editingPostId = post.id;
+    const form = document.getElementById("post-form") as HTMLFormElement;
+    (form.elements.namedItem("slug") as HTMLInputElement).value = post.slug;
+    (form.elements.namedItem("title") as HTMLInputElement).value = post.title;
+    (form.elements.namedItem("description") as HTMLInputElement).value = post.description;
+    (form.elements.namedItem("pub_date") as HTMLInputElement).value = post.pub_date;
+    (form.elements.namedItem("content") as HTMLTextAreaElement).value = post.content;
+    (form.elements.namedItem("draft") as HTMLInputElement).checked = post.draft;
+    document.getElementById("post-form-heading")!.textContent = `Editing: ${post.title}`;
+    document.getElementById("post-submit-btn")!.textContent = "Save Changes";
+    document.getElementById("post-cancel-edit-btn")!.classList.remove("hidden");
+    form.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function stopEditingPost() {
+    editingPostId = null;
+    const form = document.getElementById("post-form") as HTMLFormElement;
+    form.reset();
+    document.getElementById("post-form-heading")!.textContent = "New Post";
+    document.getElementById("post-submit-btn")!.textContent = "Publish Post";
+    document.getElementById("post-cancel-edit-btn")!.classList.add("hidden");
+  }
+
+  document.getElementById("post-cancel-edit-btn")!.addEventListener("click", stopEditingPost);
+
   async function loadPosts() {
     const { data: posts } = await supabase
       .from("site_posts")
@@ -137,12 +170,19 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
       const li = document.createElement("li");
       li.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-200 dark:border-gray-800";
       li.innerHTML = `<span>${post.title} <span class="opacity-60">${post.draft ? "(draft)" : ""}</span></span>`;
+      const actions = document.createElement("span");
+      actions.className = "flex items-center gap-3 shrink-0";
+      const edit = document.createElement("button");
+      edit.textContent = "Edit";
+      edit.className = "opacity-60 hover:opacity-100 underline";
+      edit.onclick = () => startEditingPost(post);
       const del = document.createElement("button");
       del.textContent = "Delete";
-      del.className = "opacity-60 hover:opacity-100 underline shrink-0";
+      del.className = "opacity-60 hover:opacity-100 underline";
       del.onclick = async () => {
         if (!confirm(`Delete "${post.title}"?`)) return;
         await supabase.from("site_posts").delete().eq("id", post.id);
+        if (editingPostId === post.id) stopEditingPost();
         await loadPosts();
         const rebuild = await triggerRebuild();
         showBanner(
@@ -150,7 +190,9 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
           !rebuild.ok
         );
       };
-      li.appendChild(del);
+      actions.appendChild(edit);
+      actions.appendChild(del);
+      li.appendChild(actions);
       list.appendChild(li);
     });
   }
@@ -188,7 +230,7 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const fd = new FormData(form);
-    const { error } = await supabase.from("site_posts").insert({
+    const payload = {
       slug: fd.get("slug"),
       title: fd.get("title"),
       description: fd.get("description"),
@@ -196,16 +238,24 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
       pub_date: fd.get("pub_date"),
       draft: fd.get("draft") === "on",
       author: "Sourabh Madur",
-    });
+    };
+    const wasEditing = editingPostId !== null;
+    const { error } = wasEditing
+      ? await supabase.from("site_posts").update(payload).eq("id", editingPostId)
+      : await supabase.from("site_posts").insert(payload);
     if (error) {
       showBanner(`Error: ${error.message}`, true);
       return;
     }
-    form.reset();
+    stopEditingPost();
     await loadPosts();
     const rebuild = await triggerRebuild();
     showBanner(
-      rebuild.ok ? "Post published! Site is rebuilding (~30s)." : `Post saved, but rebuild failed: ${rebuild.detail}`,
+      rebuild.ok
+        ? wasEditing
+          ? "Post updated! Site is rebuilding (~30s)."
+          : "Post published! Site is rebuilding (~30s)."
+        : `Post saved, but rebuild failed: ${rebuild.detail}`,
       !rebuild.ok
     );
   });
