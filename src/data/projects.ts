@@ -8,7 +8,7 @@ export type Project = {
   category: "Research" | "Product" | "Tools" | "Teaching";
   links: { label: string; url: string }[];
   video?: string; // YouTube video id, shown instead of a cover
-  download?: { label: string; url: string; note: string };
+  download?: { label: string; url: string; note: string; countItem?: string };
   install?: string[];
 };
 
@@ -30,8 +30,10 @@ export const projects: Project[] = [
     video: "Sx-BEsisr3E",
     download: {
       label: "Download for Chrome",
-      url: "https://github.com/sourabhmadur/focus-guard-site/releases/latest/download/focus-guard.zip",
+      // Counts the download in Supabase (download_counts), then redirects to the latest GitHub release zip.
+      url: "https://czcrafferybtstvoensa.supabase.co/functions/v1/download?item=focus-guard",
       note: "Free · v1.1.1 · needs your own OpenAI or OpenRouter API key",
+      countItem: "focus-guard",
     },
     install: [
       "Unzip the download.",

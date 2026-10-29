@@ -43,10 +43,13 @@ const seo = {
           {p.download && (
             <div class="grid gap-3 rounded-lg border border-gray-200 dark:border-gray-800 p-4">
               <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-                <a href={p.download.url} class="inline-block px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium text-sm hover:opacity-80 transition-opacity">
+                <a href={p.download.url} data-download-link={p.download.countItem} class="inline-block px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium text-sm hover:opacity-80 transition-opacity">
                   {p.download.label} ↓
                 </a>
                 <span class="text-xs opacity-60">{p.download.note}</span>
+                {p.download.countItem && (
+                  <span class="text-xs font-medium opacity-80 tabular-nums" data-download-count={p.download.countItem} hidden></span>
+                )}
               </div>
               {p.install && (
                 <ol class="text-sm list-decimal pl-5 grid gap-1 opacity-80">
@@ -72,3 +75,32 @@ const seo = {
     </div>
   </section>
 </Layout>
+
+<script>
+  // Live download counts from Supabase (public read-only table), bumped instantly on click.
+  const url = import.meta.env.PUBLIC_SUPABASE_URL;
+  const key = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+  const label = (n: number) => `Downloaded ${n.toLocaleString()} ${n === 1 ? "time" : "times"}`;
+
+  document.querySelectorAll<HTMLElement>("[data-download-count]").forEach(async (el) => {
+    const item = el.dataset.downloadCount!;
+    try {
+      const res = await fetch(`${url}/rest/v1/download_counts?item=eq.${encodeURIComponent(item)}&select=count`, {
+        headers: { apikey: key, Authorization: `Bearer ${key}` },
+      });
+      const [row] = await res.json();
+      if (!row) return;
+      let count = Number(row.count);
+      el.textContent = label(count);
+      el.hidden = false;
+      document.querySelectorAll(`[data-download-link="${item}"]`).forEach((a) =>
+        a.addEventListener("click", () => {
+          count += 1;
+          el.textContent = label(count);
+        }),
+      );
+    } catch {
+      // Leave the count hidden if Supabase can't be reached.
+    }
+  });
+</script>
