@@ -12,24 +12,6 @@ export type Project = {
 // Every number below is sourced from the project's repo (README / committed results).
 export const projects: Project[] = [
   {
-    slug: "morality-of-llms",
-    title: "How Does Thinking Mode Change LLM Moral Judgments?",
-    tagline: "A controlled instant-vs-thinking study of moral judgment in five frontier LLMs.",
-    description:
-      "100 ethical scenarios run on Claude Sonnet 4.6, GPT-5.5, Gemini 3 Flash, DeepSeek-V3.1 and Qwen3.5-397B, each compared with its own reasoning mode off and on, so the weights stay the same. Paper, benchmark, runner, analysis pipeline and all 2,963 raw responses are open.",
-    highlights: [
-      "Overall agreement looks unchanged (α 0.78 → 0.79), but on the 21 scenarios models dispute it is near chance: 0.08 instant, 0.23 with thinking.",
-      "Thinking changes the stated ethical framework more often than the verdict in all five models: 9–19% framework shifts vs 1–9% verdict flips.",
-      "\"Lightweight thinking\" is not one thing: mean reasoning tokens per call range ~80×, from 33 (Claude) to 2,639 (Qwen3.5).",
-    ],
-    tech: ["Python", "pandas", "SciPy", "Krippendorff's α", "Anthropic, OpenAI, Gemini, Together APIs", "LaTeX"],
-    category: "Research",
-    links: [
-      { label: "Paper", url: "https://github.com/sourabhmadur/morality_of_llms/blob/main/paper/main.pdf" },
-      { label: "Code & data", url: "https://github.com/sourabhmadur/morality_of_llms" },
-    ],
-  },
-  {
     slug: "mcp-servers",
     title: "MCP Servers: Google Maps + Ticketmaster",
     tagline: "Give Claude live maps, places, directions and event search.",
