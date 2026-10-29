@@ -7,10 +7,43 @@ export type Project = {
   tech: string[];
   category: "Research" | "Product" | "Tools" | "Teaching";
   links: { label: string; url: string }[];
+  video?: string; // YouTube video id, shown instead of a cover
+  download?: { label: string; url: string; note: string };
+  install?: string[];
 };
 
 // Every number below is sourced from the project's repo (README / committed results).
 export const projects: Project[] = [
+  {
+    slug: "focus-guard",
+    title: "Focus Guard",
+    tagline: "A Chrome extension that keeps you on task by looking at what's on your screen.",
+    description:
+      "Set a goal and a timer. Every few seconds Focus Guard asks a vision AI model whether the page you're on serves that goal, and if you stay off task, it blocks the page and shows you why. Unlike a blocklist, it can tell a coding tutorial on YouTube from a music video.",
+    highlights: [
+      "Judges what's on the page, not just the URL: a screenshot, the title and your goal go to a vision model every 5 seconds.",
+      "Tolerates brief detours: a page is blocked only after 15 seconds judged off task, with a one-click Resume.",
+      "Bring your own key: works with OpenAI, OpenRouter or a model you host yourself. Nothing is sent to me.",
+    ],
+    tech: ["JavaScript", "Chrome Extensions (Manifest V3)", "Vision LLMs", "OpenAI-compatible APIs"],
+    category: "Product",
+    video: "Sx-BEsisr3E",
+    download: {
+      label: "Download for Chrome",
+      url: "https://github.com/sourabhmadur/focus-guard-site/releases/latest/download/focus-guard.zip",
+      note: "Free · v1.1 · needs your own OpenAI or OpenRouter API key",
+    },
+    install: [
+      "Unzip the download.",
+      "Open chrome://extensions and turn on Developer mode.",
+      "Click Load unpacked and select the focus-guard folder.",
+      "Paste your API key on the Settings page that opens.",
+    ],
+    links: [
+      { label: "Watch the demo", url: "https://www.youtube.com/watch?v=Sx-BEsisr3E" },
+      { label: "Privacy policy", url: "https://sourabhmadur.github.io/focus-guard-site/privacy-policy.html" },
+    ],
+  },
   {
     slug: "mcp-servers",
     title: "MCP Servers: Google Maps + Ticketmaster",

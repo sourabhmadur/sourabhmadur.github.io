@@ -5,19 +5,32 @@ import { projects } from "../data/projects";
 
 const seo = {
   title: "Projects | Sourabh Madur",
-  description: "Tools and projects by Sourabh Madur: MCP servers and agent tooling.",
+  description: "Projects by Sourabh Madur: Focus Guard, an AI focus extension for Chrome, plus MCP servers and agent tooling.",
 };
 ---
 
 <Layout seo={seo}>
   <section class="mt-10 max-w-2xl mx-auto px-6 scroll-reveal">
     <h1 class="font-bold text-3xl mb-4">Projects</h1>
-    <p class="opacity-60 mb-14">Research and tools I've built, mostly around evaluating and extending LLMs.</p>
+    <p class="opacity-60 mb-14">Things I've built with LLMs: a focus tool you can download, and tools for extending Claude.</p>
 
     <div class="grid grid-cols-1 gap-16">
       {projects.map((p) => (
         <article id={p.slug} class="grid gap-4">
-          <ProjectCover slug={p.slug} />
+          {p.video ? (
+            <div class="aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-black">
+              <iframe
+                class="w-full h-full"
+                src={`https://www.youtube-nocookie.com/embed/${p.video}`}
+                title={`${p.title} demo`}
+                loading="lazy"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          ) : (
+            <ProjectCover slug={p.slug} />
+          )}
           <div>
             <p class="text-xs uppercase tracking-wider opacity-50 mb-2">{p.category}</p>
             <h2 class="font-semibold text-xl leading-snug">{p.title}</h2>
@@ -27,6 +40,21 @@ const seo = {
           <ul class="text-sm leading-relaxed list-disc pl-5 grid gap-1.5 opacity-80">
             {p.highlights.map((h) => <li>{h}</li>)}
           </ul>
+          {p.download && (
+            <div class="grid gap-3 rounded-lg border border-gray-200 dark:border-gray-800 p-4">
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <a href={p.download.url} class="inline-block px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black font-medium text-sm hover:opacity-80 transition-opacity">
+                  {p.download.label} ↓
+                </a>
+                <span class="text-xs opacity-60">{p.download.note}</span>
+              </div>
+              {p.install && (
+                <ol class="text-sm list-decimal pl-5 grid gap-1 opacity-80">
+                  {p.install.map((step) => <li>{step}</li>)}
+                </ol>
+              )}
+            </div>
+          )}
           <div class="flex flex-wrap gap-2">
             {p.tech.map((t) => (
               <span class="text-xs px-2 py-1 rounded border border-gray-200 dark:border-gray-800 opacity-70">{t}</span>
