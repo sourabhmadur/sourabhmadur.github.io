@@ -31,7 +31,7 @@ export const projects: Project[] = [
     download: {
       label: "Download for Chrome",
       url: "https://github.com/sourabhmadur/focus-guard-site/releases/latest/download/focus-guard.zip",
-      note: "Free · v1.1 · needs your own OpenAI or OpenRouter API key",
+      note: "Free · v1.1.1 · needs your own OpenAI or OpenRouter API key",
     },
     install: [
       "Unzip the download.",
