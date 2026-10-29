@@ -1,0 +1,95 @@
+---
+// Hand-drawn SVG cover art per project. Strokes use currentColor so covers follow the
+// light/dark theme; `.accent` marks the one element that carries the project's idea.
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+
+// morality-of-llms: the 100 scenarios as a 10x10 grid, the 21 model-disputed ones lit.
+const disputed = new Set([3, 7, 12, 18, 24, 29, 33, 41, 46, 50, 55, 58, 63, 67, 72, 76, 81, 85, 90, 94, 98]);
+const cells = Array.from({ length: 100 }, (_, i) => ({ x: 56 + (i % 10) * 22, y: 42 + Math.floor(i / 10) * 20, hot: disputed.has(i) }));
+---
+
+<div class="cover rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-neutral-950">
+  {slug === "morality-of-llms" && (
+    <svg viewBox="0 0 640 280" role="img" aria-label="A grid of 100 scenarios with 21 disputed ones highlighted, beside a balance scale">
+      {cells.map((c) => (
+        <circle cx={c.x} cy={c.y} r={c.hot ? 5 : 3.5} class={c.hot ? "accent-fill" : "dim-fill"} />
+      ))}
+      <text x="56" y="252" class="label">100 scenarios · 21 disputed</text>
+      <g class="line" stroke-width="2" fill="none">
+        <line x1="470" y1="70" x2="470" y2="226" />
+        <line x1="420" y1="226" x2="520" y2="226" />
+        <line x1="380" y1="96" x2="560" y2="80" />
+        <path d="M380 96 L352 156 M380 96 L408 156" />
+        <path d="M560 80 L532 140 M560 80 L588 140" />
+        <path d="M346 156 Q380 178 414 156 Z" />
+        <path d="M526 140 Q560 162 594 140 Z" class="accent-stroke" stroke-width="2.5" />
+        <circle cx="470" cy="66" r="6" />
+      </g>
+      <text x="380" y="198" text-anchor="middle" class="label">instant</text>
+      <text x="560" y="182" text-anchor="middle" class="label accent-text">thinking</text>
+    </svg>
+  )}
+
+  {slug === "mcp-servers" && (
+    <svg viewBox="0 0 640 280" role="img" aria-label="Claude connected through MCP to a street map with a location pin and to an event ticket">
+      <g class="line dim" stroke-width="1.2" fill="none">
+        <path d="M40 60 C120 50 160 110 250 96" /><path d="M40 120 C110 128 170 160 250 150" />
+        <path d="M40 190 C120 176 180 214 250 206" /><path d="M90 30 C100 110 70 180 96 250" />
+        <path d="M170 30 C160 100 196 170 176 250" />
+      </g>
+      <g class="accent-stroke" stroke-width="2.5" fill="none">
+        <path d="M152 118 c0 -20 30 -20 30 0 c0 14 -15 30 -15 30 c0 0 -15 -16 -15 -30 z" />
+      </g>
+      <circle cx="167" cy="118" r="4" class="accent-fill" />
+      <g class="line" stroke-width="2" fill="none">
+        <rect x="410" y="88" width="190" height="104" rx="8" />
+        <line x1="470" y1="88" x2="470" y2="192" stroke-dasharray="5 5" />
+      </g>
+      <text x="535" y="134" text-anchor="middle" class="label">EVENT</text>
+      <text x="535" y="156" text-anchor="middle" class="label dim-text">SAT · 8 PM</text>
+      <circle cx="330" cy="140" r="30" class="line" fill="none" stroke-width="2" />
+      <text x="330" y="145" text-anchor="middle" class="label">Claude</text>
+      <g class="line" stroke-width="1.5" fill="none">
+        <line x1="300" y1="140" x2="256" y2="140" /><line x1="360" y1="140" x2="404" y2="140" />
+      </g>
+      <text x="278" y="128" text-anchor="middle" class="tiny dim-text">8 tools</text>
+      <text x="382" y="128" text-anchor="middle" class="tiny dim-text">6 tools</text>
+    </svg>
+  )}
+
+  {slug === "agent-sdk-starter" && (
+    <svg viewBox="0 0 640 280" role="img" aria-label="Five ascending steps, from query to subagents">
+      {["query()", "client", "@tool", "hooks", "subagents"].map((name, i) => (
+        <g>
+          <rect x={70 + i * 102} y={210 - (i + 1) * 30} width="92" height={(i + 1) * 30} rx="4"
+            class={i === 4 ? "accent-stroke" : "line"} fill="none" stroke-width={i === 4 ? 2.5 : 2} />
+          <text x={116 + i * 102} y={200 - (i + 1) * 30} text-anchor="middle" class={i === 4 ? "label accent-text" : "label"}>{name}</text>
+          <text x={116 + i * 102} y="232" text-anchor="middle" class="tiny dim-text">step {i + 1}</text>
+        </g>
+      ))}
+      <text x="70" y="48" class="mono dim-text">$ python step5_subagent.py ~/repo</text>
+    </svg>
+  )}
+</div>
+
+<style>
+  .cover svg { display: block; width: 100%; height: auto; color: #111827; }
+  :global(.dark) .cover svg { color: #e5e7eb; }
+  .cover :global(.line) { stroke: currentColor; }
+  .cover :global(.dim) { opacity: 0.35; }
+  .cover :global(.dim-fill) { fill: currentColor; opacity: 0.25; }
+  .cover :global(.accent-fill) { fill: #2563eb; }
+  .cover :global(.accent-stroke) { stroke: #2563eb; }
+  .cover :global(.accent-text) { fill: #2563eb; }
+  :global(.dark) .cover :global(.accent-fill),
+  :global(.dark) .cover :global(.accent-text) { fill: #60a5fa; }
+  :global(.dark) .cover :global(.accent-stroke) { stroke: #60a5fa; }
+  .cover :global(text) { fill: currentColor; font-family: Inter, sans-serif; }
+  .cover :global(.label) { font-size: 14px; font-weight: 500; }
+  .cover :global(.tiny) { font-size: 11px; }
+  .cover :global(.mono) { font-family: Menlo, Monaco, monospace; font-size: 13px; }
+  .cover :global(.dim-text) { opacity: 0.55; }
+</style>
