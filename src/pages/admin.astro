@@ -31,6 +31,30 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
       <div id="status-banner" class="hidden mb-6 p-3 rounded-lg text-sm"></div>
 
       <section class="mb-16">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold">Visitors</h2>
+          <select id="analytics-range" class="px-2 py-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-black text-sm">
+            <option value="1">Last 24 hours</option>
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+        </div>
+        <div id="analytics-totals" class="grid grid-cols-3 gap-3 mb-8"></div>
+        <div id="analytics-tables" class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8"></div>
+        <h3 class="font-semibold mb-2">Recent visits</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs">
+            <thead class="opacity-60 text-left">
+              <tr><th class="py-1 pr-3">When</th><th class="pr-3">Page</th><th class="pr-3">Where</th><th class="pr-3">Network</th><th class="pr-3">From</th><th>Device</th></tr>
+            </thead>
+            <tbody id="analytics-recent"></tbody>
+          </table>
+        </div>
+        <p class="text-xs opacity-50 mt-4">Your own visits are not counted on this browser.</p>
+      </section>
+
+      <section class="mb-16">
         <h2 id="post-form-heading" class="text-xl font-bold mb-4">New Post</h2>
         <form id="post-form" class="space-y-3">
           <input name="slug" placeholder="slug (e.g. my-new-post)" required class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-transparent" />
@@ -306,6 +330,107 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     window.location.reload();
   });
 
+  function el(tag: string, className = "", text = ""): HTMLElement {
+    const e = document.createElement(tag);
+    if (className) e.className = className;
+    if (text) e.textContent = text;
+    return e;
+  }
+
+  function topCounts(rows: any[], key: (r: any) => string | null, n = 8): [string, number][] {
+    const counts = new Map<string, number>();
+    for (const r of rows) {
+      const k = key(r);
+      if (k) counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, n);
+  }
+
+  function hostOf(url: string | null): string | null {
+    if (!url) return null;
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return url; }
+  }
+
+  function renderTopTable(title: string, entries: [string, number][]) {
+    const wrap = el("div");
+    wrap.appendChild(el("h3", "font-semibold mb-2", title));
+    if (!entries.length) {
+      wrap.appendChild(el("p", "text-sm opacity-50", "No data yet"));
+      return wrap;
+    }
+    const max = entries[0][1];
+    const list = el("ul", "space-y-1 text-sm");
+    for (const [label, count] of entries) {
+      const li = el("li", "relative flex justify-between gap-3 px-2 py-1 rounded");
+      const bar = el("span", "absolute inset-y-0 left-0 rounded bg-gray-100 dark:bg-gray-900");
+      bar.style.width = `${(count / max) * 100}%`;
+      const name = el("span", "relative truncate", label);
+      const num = el("span", "relative opacity-60 tabular-nums", String(count));
+      li.append(bar, name, num);
+      list.appendChild(li);
+    }
+    wrap.appendChild(list);
+    return wrap;
+  }
+
+  async function loadAnalytics() {
+    const days = Number((document.getElementById("analytics-range") as HTMLSelectElement).value);
+    const since = new Date(Date.now() - days * 86400000).toISOString();
+    const { data, error } = await supabase
+      .from("site_page_views")
+      .select("*")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(10000);
+    const totalsEl = document.getElementById("analytics-totals")!;
+    const tablesEl = document.getElementById("analytics-tables")!;
+    const recentEl = document.getElementById("analytics-recent")!;
+    totalsEl.replaceChildren();
+    tablesEl.replaceChildren();
+    recentEl.replaceChildren();
+    if (error) {
+      totalsEl.appendChild(el("p", "text-sm text-red-600 col-span-3", `Couldn't load analytics: ${error.message}`));
+      return;
+    }
+    const rows = data ?? [];
+
+    const stats: [string, number][] = [
+      ["Page views", rows.length],
+      ["Visitors", new Set(rows.map((r) => r.visitor_id)).size],
+      ["Visits", new Set(rows.map((r) => r.session_id)).size],
+    ];
+    for (const [label, value] of stats) {
+      const card = el("div", "p-3 rounded-lg border border-gray-200 dark:border-gray-800");
+      card.append(el("div", "text-2xl font-bold tabular-nums", value.toLocaleString()), el("div", "text-xs opacity-60", label));
+      totalsEl.appendChild(card);
+    }
+
+    tablesEl.append(
+      renderTopTable("Pages", topCounts(rows, (r) => r.path)),
+      renderTopTable("Referrers", topCounts(rows, (r) => hostOf(r.referrer) ?? (r.utm_source ? `utm: ${r.utm_source}` : null))),
+      renderTopTable("Countries", topCounts(rows, (r) => r.country)),
+      renderTopTable("Cities", topCounts(rows, (r) => (r.city ? `${r.city}, ${r.country ?? ""}` : null))),
+      renderTopTable("Networks / companies", topCounts(rows, (r) => r.org)),
+      renderTopTable("Devices", topCounts(rows, (r) => (r.device ? `${r.device} · ${r.browser ?? "?"}` : null))),
+    );
+
+    for (const r of rows.slice(0, 50)) {
+      const tr = el("tr", "border-t border-gray-200 dark:border-gray-800");
+      const cells = [
+        new Date(r.created_at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }),
+        r.path,
+        [r.city, r.country].filter(Boolean).join(", "),
+        r.org ?? "",
+        hostOf(r.referrer) ?? "",
+        r.device ?? "",
+      ];
+      cells.forEach((c, i) => tr.appendChild(el("td", `py-1 pr-3 ${i === 1 ? "" : "opacity-70"} whitespace-nowrap`, c)));
+      recentEl.appendChild(tr);
+    }
+  }
+
+  document.getElementById("analytics-range")!.addEventListener("change", loadAnalytics);
+
   async function init() {
     const { data: { session } } = await supabase.auth.getSession();
 
@@ -325,6 +450,9 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
 
     whoamiEl.textContent = `Signed in as ${session.user.email}`;
     adminPanelEl.classList.remove("hidden");
+    // Don't count the owner's own browsing in analytics.
+    localStorage.setItem("sm_no_track", "1");
+    await loadAnalytics();
     await loadPosts();
     await loadBooks();
   }

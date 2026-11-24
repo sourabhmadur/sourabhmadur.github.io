@@ -57,6 +57,37 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
         (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       document.documentElement.classList.toggle("dark", theme === "dark");
     </script>
+
+    <!-- Page-view analytics (self-hosted on Supabase; see /admin) -->
+    <script is:inline define:vars={{ trackUrl: `${import.meta.env.PUBLIC_SUPABASE_URL}/functions/v1/track-visit` }}>
+      (function () {
+        try {
+          if (location.hostname !== "sourabhmadur.github.io") return;
+          if (location.pathname.startsWith("/admin")) return;
+          if (localStorage.getItem("sm_no_track") === "1" || navigator.webdriver) return;
+          function id(store, key) {
+            var v = store.getItem(key);
+            if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); store.setItem(key, v); }
+            return v;
+          }
+          var ref = document.referrer;
+          if (ref && new URL(ref).hostname === location.hostname) ref = "";
+          var body = JSON.stringify({
+            path: location.pathname,
+            referrer: ref || null,
+            visitor_id: id(localStorage, "sm_vid"),
+            session_id: id(sessionStorage, "sm_sid"),
+            utm_source: new URLSearchParams(location.search).get("utm_source"),
+            screen_width: screen.width,
+          });
+          // text/plain avoids a CORS preflight; sendBeacon survives page unloads.
+          var blob = new Blob([body], { type: "text/plain" });
+          if (!(navigator.sendBeacon && navigator.sendBeacon(trackUrl, blob))) {
+            fetch(trackUrl, { method: "POST", body: body, keepalive: true, headers: { "Content-Type": "text/plain" } });
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-white dark:bg-black text-black dark:text-white transition-colors">
     <header>
