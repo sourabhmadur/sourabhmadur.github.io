@@ -115,7 +115,11 @@ const mappedBooks = allBooks.filter((b) => b.country);
         const book = bookMap.get(d.properties.name);
         if (!book) return;
         tooltip.style.display = "block";
-        tooltip.innerHTML = `<strong>${book.country}</strong><br/>${book.title}<br/><em>${book.author}</em>`;
+        const country = document.createElement("strong");
+        country.textContent = book.country;
+        const author = document.createElement("em");
+        author.textContent = book.author;
+        tooltip.replaceChildren(country, document.createElement("br"), book.title, document.createElement("br"), author);
       })
       .on("mousemove", function (event: MouseEvent) {
         tooltip.style.left = event.clientX + 12 + "px";

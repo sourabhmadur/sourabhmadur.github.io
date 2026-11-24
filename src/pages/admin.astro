@@ -193,7 +193,13 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     (posts ?? []).forEach((post: any) => {
       const li = document.createElement("li");
       li.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-200 dark:border-gray-800";
-      li.innerHTML = `<span>${post.title} <span class="opacity-60">${post.draft ? "(draft)" : ""}</span></span>`;
+      const label = document.createElement("span");
+      label.append(post.title, " ");
+      const draftTag = document.createElement("span");
+      draftTag.className = "opacity-60";
+      draftTag.textContent = post.draft ? "(draft)" : "";
+      label.appendChild(draftTag);
+      li.appendChild(label);
       const actions = document.createElement("span");
       actions.className = "flex items-center gap-3 shrink-0";
       const edit = document.createElement("button");
@@ -231,7 +237,13 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "Angola", "Antarctica", 
     (books ?? []).forEach((book: any) => {
       const li = document.createElement("li");
       li.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-200 dark:border-gray-800";
-      li.innerHTML = `<span>${book.title} <span class="opacity-60">by ${book.author}${book.country ? ` &middot; ${book.country}` : ""}</span></span>`;
+      const label = document.createElement("span");
+      label.append(book.title, " ");
+      const meta = document.createElement("span");
+      meta.className = "opacity-60";
+      meta.textContent = `by ${book.author}${book.country ? ` · ${book.country}` : ""}`;
+      label.appendChild(meta);
+      li.appendChild(label);
       const del = document.createElement("button");
       del.textContent = "Delete";
       del.className = "opacity-60 hover:opacity-100 underline shrink-0";
